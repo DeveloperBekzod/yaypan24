@@ -46,7 +46,15 @@
 											<td>
 												<div class="badge badge-success">Active</div>
 											</td>
-											<td><a href="#" class="btn btn-primary">Detail</a></td>
+											<td>
+												<a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-primary">Detail</a>
+												<a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
+												<form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="d-inline">
+													@csrf
+													@method('delete')
+													<button type="submit" onclick=" confirm('Are You shure delete category !!!')"  class="btn btn-icon icon-left btn-danger"><i class="fas fa-times"></i> Delete</button>
+												</form>
+											</td>
 										</tr>
 										@empty
 											<tr>

@@ -45,32 +45,45 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.categories.detail', ['category'=>$category]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', ['category'=>$category]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+			$request->validate([
+				'name_uz'=>'required',
+				'name_ru'=>'required'
+			]);
+
+			$requestData = $request->all();
+
+			$requestData['slug_uz'] = \Str::slug($requestData['name_uz']);
+			$requestData['slug_ru'] = \Str::slug($requestData['name_ru']);
+
+			$category->update($requestData);
+
+			return redirect()->route('admin.categories.index')->with('message', 'Category updated successfully !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+			$category->delete();
+			return redirect()->route('admin.categories.index')->with('message', 'Category deleted successfully !');
     }
 }
