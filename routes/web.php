@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\Admin\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +20,14 @@ Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::get('/posts/{slug}', [SiteController::class, 'postDetail'])->name('postDetail');
 Route::get('/category/{slug}', [SiteController::class, 'categoryPosts'])->name('categoryPosts');
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
+
+Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
+	Route::get('/dashboard', function () {
+			return view('admin.dashboard');
+	})->middleware(['verified'])->name('dashboard');
+	Route::resource('categories', CategoriesController::class);
+});
+
 
 Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');

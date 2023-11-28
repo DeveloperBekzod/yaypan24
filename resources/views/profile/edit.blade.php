@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+	Profile
+@endsection
+
 @section('content')
 <!-- Main Content -->
 <div class="main-content">
@@ -8,9 +12,14 @@
 			<div class="row">
 				<div class="col-8">
 					@if (session('status'))
-						<div class="alert alert-success" role="alert">
-								{{ session('status') }}
+					<div class="alert alert-success alert-dismissible show fade">
+						<div class="alert-body">
+							<button class="close" data-dismiss="alert">
+								<span>×</span>
+							</button>
+							{{session('status')}}
 						</div>
+					</div>
 					@endif
 				</div>
 			</div>

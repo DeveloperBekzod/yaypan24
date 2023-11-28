@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
 	<aside id="sidebar-wrapper">
 		<div class="sidebar-brand">
-			<a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
+			<a href="{{route('admin.dashboard')}}"> <img alt="image" src="/admin/assets/img/logo.png" class="header-logo" /> <span
 					class="logo-name">Otika</span>
 			</a>
 		</div>
@@ -9,6 +9,9 @@
 			<li class="menu-header">Main</li>
 			<li class="dropdown active">
 				<a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+			</li>
+			<li class="dropdown">
+				<a href="{{route('admin.categories.index')}}" class="nav-link"><i data-feather="minus-square"></i><span>Categories</span></a>
 			</li>
 			<li class="dropdown">
 				<a href="#" class="menu-toggle nav-link has-dropdown"><i

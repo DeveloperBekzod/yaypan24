@@ -34,34 +34,47 @@
 									@csrf
                   <div class="row">
                     <div class="form-group col-6">
-                      <label for="frist_name">First Name</label>
-                      <input id="frist_name" type="text" class="form-control" name="frist_name" autofocus>
+                      <label for="first_name">First Name</label>
+                      <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{old('first_name')}}" autofocus>
+											@error('first_name')
+												<span class="invalid-feedback" role="alert">{{$message}}</span>
+											@enderror
                     </div>
                     <div class="form-group col-6">
                       <label for="last_name">Last Name</label>
-                      <input id="last_name" type="text" class="form-control" name="last_name">
+                      <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{old('last_name')}}">
+											@error('last_name')
+												<span class="invalid-feedback" role="alert">{{$message}}</span>
+											@enderror
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email">
-                    <div class="invalid-feedback">
-                    </div>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}">
+                    @error('email')
+												<span class="invalid-feedback" role="alert">{{$message}}</span>
+										@enderror
                   </div>
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="password" class="d-block">Password</label>
-                      <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
+                      <input id="password" type="password" class="form-control pwstrength @error('password') is-invalid @enderror" data-indicator="pwindicator"
                         name="password">
                       <div id="pwindicator" class="pwindicator">
                         <div class="bar"></div>
                         <div class="label"></div>
                       </div>
+											@error('password')
+												<span class="invalid-feedback" role="alert">{{$message}}</span>
+											@enderror
                     </div>
                     <div class="form-group col-6">
                       <label for="password2" class="d-block">Password Confirmation</label>
-                      <input id="password2" type="password" class="form-control" name="password_confirmation">
+                      <input id="password2" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation">
                     </div>
+										@error('password_confirmation')
+												<span class="invalid-feedback" role="alert">{{$message}}</span>
+										@enderror
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
