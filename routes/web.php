@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,13 +27,15 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
 			return view('admin.dashboard');
 	})->middleware(['verified'])->name('dashboard');
 	Route::resource('categories', CategoriesController::class);
+	Route::resource('posts', PostController::class);
+	Route::post('post-image-upload', [PostController::class, 'upload'])->name('upload');
 });
 
 
 Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('admin/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('admin/profile', [PostController::class, 'upload'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
