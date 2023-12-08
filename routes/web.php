@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,7 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
 	})->middleware(['verified'])->name('dashboard');
 	Route::resource('categories', CategoriesController::class);
 	Route::resource('posts', PostController::class);
+	Route::resource('tags', TagController::class);
 	Route::post('post-image-upload', [PostController::class, 'upload'])->name('upload');
 });
 

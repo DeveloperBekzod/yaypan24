@@ -14,7 +14,10 @@
 				<a href="{{route('admin.categories.index')}}" class="nav-link"><i data-feather="minus-square"></i><span>Categories</span></a>
 			</li>
 			<li class="dropdown">
-				<a href="{{route('admin.posts.index')}}" class="nav-link"><i data-feather="minus-square"></i><span>Posts</span></a>
+				<a href="{{route('admin.posts.index')}}" class="nav-link"><i data-feather="book"></i><span>Posts</span></a>
+			</li>
+			<li class="dropdown">
+				<a href="{{route('admin.tags.index')}}" class="nav-link"><i data-feather="tag"></i><span>Tags</span></a>
 			</li>
 		</ul>
 	</aside>
