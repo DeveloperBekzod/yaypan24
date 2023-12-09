@@ -53,7 +53,7 @@
 										<tr>
 											<td>{{$loop->iteration}}</td>
 											<td>{{ $post->title_uz}}</td>
-											<td>{{$post->category_id}}</td>
+											<td>{{$post->category->name_uz}}</td>
 											<td>
 												<img alt="image" src="/img/posts/{{$post->image}}" width="35">
 											</td>

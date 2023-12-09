@@ -28,16 +28,20 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>ID:</td>
-										<td>{{$post->id}}</td>
-									</tr>
-									<tr>
 										<td>Title (Uz)</td>
 										<td>{{$post->title_uz}}</td>
 									</tr>
 									<tr>
 										<td>Title (Ru)</td>
 										<td>{{$post->title_ru}}</td>
+									</tr>
+									<tr>
+										<td>Tags</td>
+										<td>
+											@foreach ($post->tags as $tag)
+													<span class="badge badge-primary">{{$tag->name_uz}}</span>
+											@endforeach
+										</td>
 									</tr>
 									<tr>
 										<td>Text (Uz)</td>

@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('css')
+	<link rel="stylesheet" href="/admin/assets/bundles/select2/dist/css/select2.min.css">
+@endsection
+
 @section('title')
 	Create Post
 @endsection
@@ -41,6 +45,17 @@
 										@endforeach
 									</select>
 									@error('category_id')
+									<span class="invalid-feedback" role="alert">{{$message}}</span>
+									@enderror
+								</div>
+								<div class="form-group">
+									<label for="tags">Post tags</label>
+									<select name="tags[]" id="tags" class="form-control select2" multiple required>
+										@foreach ($tags as $tag)
+											<option value={{$tag->id}}>{{$tag->name_uz}}</option>
+										@endforeach
+									</select>
+									@error('tags')
 									<span class="invalid-feedback" role="alert">{{$message}}</span>
 									@enderror
 								</div>
@@ -108,15 +123,16 @@
 @endsection
 
 @section('js')
-<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
-<script>
-	CKEDITOR.replace( 'text_uz', {
-		filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
-		filebrowserUploadMethod: 'form'
-	});
-	CKEDITOR.replace( 'text_ru', {
-        filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
-        filebrowserUploadMethod: 'form'
-    });
-</script>
+	<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+	<script>
+		CKEDITOR.replace( 'text_uz', {
+			filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
+			filebrowserUploadMethod: 'form'
+		});
+		CKEDITOR.replace( 'text_ru', {
+					filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
+					filebrowserUploadMethod: 'form'
+			});
+	</script>
+	<script src="/admin/assets/bundles/select2/dist/js/select2.full.min.js"></script>
 @endsection

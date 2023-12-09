@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Post;
 use App\Models\Admin\Category;
+use App\Models\Admin\Tag;
 use Str;
 
 class PostController extends Controller
@@ -26,7 +27,8 @@ class PostController extends Controller
     public function create()
     {
 				$categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+				$tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -34,6 +36,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+			// dd($request->tags);
         $request->validate([
 					'title_uz' => 'required',
 					'title_ru' => 'required',
@@ -53,8 +56,8 @@ class PostController extends Controller
 					$requestData['image'] = $image_name;
 				}
 
-				Post::create($requestData);
-
+				$post = Post::create($requestData);
+				$post->tags()->attach($request->tags);
 				return redirect()->route('admin.posts.index')->with('message', 'Post created successfully !!!');
     }
 
@@ -72,7 +75,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
 				$categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+				$tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -100,7 +104,7 @@ class PostController extends Controller
 				}
 
 				$post->update($requestData);
-
+				$post->tags()->sync($request->tags);
 				return redirect()->route('admin.posts.index')->with('message', 'Post updated successfully !!!');
     }
 
