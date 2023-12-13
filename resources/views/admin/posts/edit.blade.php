@@ -38,6 +38,19 @@
 									@enderror
 								</div>
 								<div class="form-group">
+									<div class="control-label">Special post</div>
+									<label class="custom-switch mt-2">
+										<input type="checkbox" name="is_special" value="1" @if ($post->is_special)
+											checked
+										@endif class="custom-switch-input">
+										<span class="custom-switch-indicator"></span>
+										<span class="custom-switch-description">This post shows on the top of home page</span>
+										@error('is_special')
+										<span class="invalid-feedback" role="alert">{{$message}}</span>
+										@enderror
+									</label>
+								</div>
+								<div class="form-group">
 									<label for="category_id">Post category</label>
 									<select name="category_id" id="category_id" class="form-control" required>
 										<option>Select category</option>

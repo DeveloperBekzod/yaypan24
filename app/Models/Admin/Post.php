@@ -4,13 +4,13 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use App\Models\Admin\Tag;
 
 class Post extends Model
 {
     use HasFactory;
 		protected $fillable = [
 			'category_id',
+			'is_special',
 			'title_uz',
 			'title_ru',
 			'slug_uz',

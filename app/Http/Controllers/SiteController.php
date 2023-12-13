@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin\Post;
 
+
 class SiteController extends Controller
 {
     public function index() {
 			$posts = Post::all();
-			return view('index', compact('posts'));
+			$specialpost = Post::where('is_special', true)->limit(6)->latest()->get();
+			$latestpost = Post::limit(6)->latest()->get();
+			return view('index', compact('posts', 'specialpost', 'latestpost'));
 		}
 
 		public function contact(){
@@ -21,6 +24,6 @@ class SiteController extends Controller
 		}
 		
 		public function categoryPosts(){
-			return view('postDetail');
+			return view('categoryPosts');
 		}
 }

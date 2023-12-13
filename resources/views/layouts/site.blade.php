@@ -36,9 +36,13 @@
               <button type="submit" class="btn search-btn"></button>
             </form>
             <div class="languages">
-              <button type="button" class="btn language__option language__option--active">РУ</button>
+              <a href="javascript:void(0);"class="btn language__option language__option--{{ \App::getLocale() }} language__option--active">
+								{{ \App::getLocale()=='ru' ? 'РУ' : 'o\'z' }}
+							</a>
               <div class="languages__list">
-                <button type="button" class="btn language__option language__option--uz" data-status="disabled">UZ</button>
+                <a href="lang/{{ \App::getLocale()=='ru' ? 'uz' : 'ru' }}" class="btn language__option language__option--{{ \App::getLocale()=='ru' ? 'uz' : 'ru' }}" data-status="disabled">
+									{{ \App::getLocale()=='ru' ? 'o\'z' : 'РУ' }}
+								</a>
               </div>
             </div> 
             <div class="telegram-join basic-flex">

@@ -620,6 +620,7 @@ a {
   font-size: 16px;
   font-weight: 500;
   color: #535353;
+	text-transform: uppercase;
   background-color: #fff;
 }
 
@@ -628,7 +629,6 @@ a {
   content: '';
   height: 40px;
   width: 40px;
-  background-image: url("../img/ru.png");
   background-position: center center;
   background-size: 50%;
   background-repeat: no-repeat;
@@ -636,6 +636,9 @@ a {
 
 .language__option--uz::before {
   background-image: url("../img/uz.png");
+}
+.language__option--ru::before {
+  background-image: url("../img/ru.png");
 }
 
 .language__option--active {

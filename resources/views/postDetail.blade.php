@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
 @section('title')
-	Post detail
+	{{$post['slug_'.\App::getLocale()]}}
 @endsection
 
 @section('content')
@@ -9,12 +9,14 @@
 	<div class="container">
 		<div class="news__wrapper basic-flex">
 			<div class="article__wrapper">
-				<h2 class="article__title">Шавкат Мирзиёев строго предупредил хокимов всех уровней
+				<h2 class="article__title">{{$post['title_'.\App::getLocale()]}}
 				</h2>
 				<span class="article__date basic-flex">11:31 / 15.05.2020</span>
-				<img src="/img/article-img.png" alt="Шавкат Мирзиёев строго предупредил хокимов всех уровней
-				">
-				<p class="important-text">
+				<img src="/img/posts/{{$post->image}}" alt="{{$post['title_'.\App::getLocale()]}}">
+				<div>
+					{{$post['text_'.\App::getLocale()]}}
+				</div>
+				{{-- <p class="important-text">
 					19 мая состоялось видеоселекторное совещание, посвященное дополнительным мерам поддержки предпринимательства.
 				</p>
 
@@ -44,7 +46,7 @@
 
 				<p>
 					Кабинетом Министров будет рассматриваться вопрос о соответствии должности хокимов городов и районов, которые не решают проблемы предпринимателей и не работают с ними в достаточной мере.
-				</p>
+				</p> --}}
 
 				<div class="hashtags basic-flex">
 					<a href="#">#хоким</a>

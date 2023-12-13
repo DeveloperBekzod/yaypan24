@@ -1,15 +1,16 @@
 <section class="posts">
 	<div class="container">
 		<ul class="posts__list basic-flex">
-			<li class="posts__item">
-				<a href="#">
-					<img src="img/top1.png" alt="Image" class="posts__img">
-					<h2 class="posts__title">Мирзиёев рассказал, зачем было построено 
-						Сардобинское водохранилище</h2>
-					<span class="posts__date">05:28 / 16.05.2020</span>
-				</a>
-			</li>
-			<li class="posts__item">
+			@foreach ($specialpost as $post)
+				<li class="posts__item">
+					<a href="#">
+						<img src="/img/posts/{{$post->image}}" alt="{{$post['title_'.\App::getLocale()]}}" class="posts__img">
+						<h2 class="posts__title">{{$post['title_'.\App::getLocale()]}}</h2>
+						<span class="posts__date">{{$post->created_at->setTimezone('Asia/Tashkent')->format('H:i / d.m.Y')}}</span>
+					</a>
+				</li>
+			@endforeach
+			{{-- <li class="posts__item">
 				<a href="#">
 					<img src="img/top2.png" alt="Image" class="posts__img">
 					<h2 class="posts__title">Карантин в Узбекистане продлен до 1 июня</h2>
@@ -45,7 +46,7 @@
 					<h2 class="posts__title">Итоги второго месяца карантина</h2>
 					<span class="posts__date">05:28 / 16.05.2020</span>
 				</a>
-			</li>
+			</li> --}}
 		</ul>
 	</div>
 </section>
