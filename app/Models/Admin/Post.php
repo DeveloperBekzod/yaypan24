@@ -34,4 +34,12 @@ class Post extends Model
 		public function tags() {
 			return $this->belongsToMany(Tag::class);
 		}
+
+		public static function boot() {
+			parent::boot();
+			static::saving(function ($post) {
+				$post->slug_uz = \Str::slug($post->title_uz);
+				$post->slug_ru = \Str::slug($post->title_ru);
+			});
+		}
 }
