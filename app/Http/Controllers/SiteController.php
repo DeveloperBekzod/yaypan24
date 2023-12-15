@@ -11,8 +11,8 @@ class SiteController extends Controller
 {
     public function index() {
 			$specialpost = Post::where('is_special', true)->limit(6)->latest()->get();
-			$latestpost = Post::where('is_special', false)->limit(6)->latest()->get();
-			return view('index', compact('specialpost', 'latestpost'));
+			$posts = Post::where('is_special', false)->limit(6)->latest()->get();
+			return view('index', compact('specialpost', 'posts'));
 		}
 
 		public function contact(){
@@ -33,13 +33,22 @@ class SiteController extends Controller
 		
 		public function categoryPosts($category_slug){
 			$category = Category::where('slug_'.\App::getLocale(), $category_slug)->first();
-			$latestpost = $category->posts;
-			return view('categoryPosts', compact('latestpost', 'category'));
+			$posts = $category->posts()->paginate(6);
+			return view('categoryPosts', compact('posts', 'category'));
 		}
 
 		public function tags($tag_slug){
 			$tag = Tag::where('slug_'.\App::getLocale(), $tag_slug)->first();
-			$latestpost = $tag->posts;
-			return view('categoryPosts', compact('latestpost', 'tag'));
+			$posts = $tag->posts;
+			return view('categoryPosts', compact('posts', 'tag'));
+		}
+
+		public function search(Request $request) {
+			$key = $request->key;
+			$posts = Post::where('title_'.\App::getLocale(), 'like', '%'.$key.'%')
+			->orWhere('text_'.\App::getLocale(), 'like', '%'.$key.'%')
+			->get();
+			// dd($key);
+			return view('search', compact('key', 'posts'));
 		}
 }

@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
 @section('title')
-	Category {{$category['name_'.\App::getLocale()]}}
+	Search page {{$key}}
 @endsection
 
 @section('content')
@@ -10,9 +10,11 @@
 	<div class="container">
 		<div class="news__wrapper basic-flex">
 			<div class="column-news">
-				<h2 class="news__title">{{$category['name_'.\App::getLocale()]}} Последние новости</h2>
+				<h2 class="news__title">
+					@if (count($posts)>0) "{{$key}}" bo'yicha {{count($posts)}} ta natija topildi.
+					@else "{{$key}}" bo'yicha hech narsa topilmadi.
+					@endif</h2>
 				@include('sections.latestPosts')
-				{{$posts->links()}}
 				<button type="button" class="btn load-more-btn">Больше новостей</button>
 			</div>
 			@include('sections.popularPosts')
