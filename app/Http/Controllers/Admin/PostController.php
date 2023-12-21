@@ -37,7 +37,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-			// dd($request->all());
         $request->validate([
 					'title_uz' => 'required',
 					'title_ru' => 'required',
@@ -47,8 +46,6 @@ class PostController extends Controller
 				]);
 
 				$requestData = $request->all();
-				// $requestData['slug_uz'] = Str::slug($requestData['title_uz']);
-				// $requestData['slug_ru'] = Str::slug($requestData['title_ru']);
 
 				if($request->hasFile('image')) {
 					$file = $request->file('image');
@@ -95,9 +92,6 @@ class PostController extends Controller
 
 				$requestData = $request->all();
 				if(!$request['is_special']) $requestData['is_special'] = false;
-				// dd($requestData);
-				// $requestData['slug_uz'] = Str::slug($requestData['title_uz']);
-				// $requestData['slug_ru'] = Str::slug($requestData['title_ru']);
 
 				if($request->hasFile('image')) {
 					$file = $request->file('image');

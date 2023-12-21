@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin\Post;
 use App\Models\Admin\Category;
+use App\Models\Message as Messagemodel;
+use Mail;
+use App\Mail\Message;
+use App\Rules\GoogleRecaptcha;
 
 
 class SiteController extends Controller
@@ -50,5 +54,25 @@ class SiteController extends Controller
 			->get();
 			// dd($key);
 			return view('search', compact('key', 'posts'));
+		}
+
+		public function sendMessage(Request $request) {
+			$request->validate([
+				'name'=>'required',
+				'email' => 'required',
+				'telephone' => 'required',
+				'message' => 'required',
+				'g-recaptcha-response' => ['required', new GoogleRecaptcha]
+				],[ 'g-recaptcha-response.required' => 'The recaptcha field is required.']);
+			$requestData = $request->all();
+			if($request->hasFile('file')) {
+				$file = $request->file('file');
+				$file_name = time().'.'.$file->getClientOriginalExtension();
+				$file->move('files/', $file_name);
+				$requestData['file'] = 'files/'.$file_name;
+			}
+			$message = Messagemodel::create($requestData);
+			Mail::to('raximovbekzodbek95@gmail.com')->send(new Message($requestData));
+			return back()->with('message', 'Murojaat yuborildi.');
 		}
 }

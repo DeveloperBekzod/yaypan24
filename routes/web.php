@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\TagController;
 
 Route::get('/', [SiteController::class, 'index'])->name('index');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+Route::post('/contact', [SiteController::class, 'sendMessage'])->name('sendMessage');
 Route::get('/posts/{slug}', [SiteController::class, 'postDetail'])->name('postDetail');
 Route::get('/tags/{slug}', [SiteController::class, 'tagsPost'])->name('tagsPost');
 Route::get('/category/{slug}', [SiteController::class, 'categoryPosts'])->name('categoryPosts');

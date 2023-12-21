@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 <body>
-  {{-- <div class="layer">
+  <div class="layer">
     <div class="modal-box basic-flex">
       <button type="button" class="btn hide-modal-btn">x</button>
       <h4>Подписывайтесь на наш канал в Telegram и будьте всегда в курсе самых последних новостей:</h4>
@@ -16,7 +16,7 @@
         <a href="#"><img src="/img/tg.png" alt="Telegram">Подписатся</a>
       </div>
     </div>
-  </div> --}}
+  </div>
   <div class="menu-mask"></div>
   <main>
     <header class="main-header">
@@ -101,6 +101,8 @@
 	</footer>
 
 <script src="{{asset('js/main.js')}}"></script>
+
+@yield('js')
 
 </body>
 </html>
