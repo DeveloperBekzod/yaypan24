@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-		@yield('title') - YAYPAN 24</title>
+	@meta_tags
+  {{-- <title> @yield('title') - YAYPAN 24</title> --}}
   <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 <body>
-  <div class="layer">
+  {{-- <div class="layer">
     <div class="modal-box basic-flex">
       <button type="button" class="btn hide-modal-btn">x</button>
       <h4>Подписывайтесь на наш канал в Telegram и будьте всегда в курсе самых последних новостей:</h4>
@@ -16,7 +14,7 @@
         <a href="#"><img src="/img/tg.png" alt="Telegram">Подписатся</a>
       </div>
     </div>
-  </div>
+  </div> --}}
   <div class="menu-mask"></div>
   <main>
     <header class="main-header">
@@ -40,14 +38,14 @@
 								{{ \App::getLocale()=='ru' ? 'РУ' : 'o\'z' }}
 							</a>
               <div class="languages__list">
-                <a href="lang/{{ \App::getLocale()=='ru' ? 'uz' : 'ru' }}" class="btn language__option language__option--{{ \App::getLocale()=='ru' ? 'uz' : 'ru' }}" data-status="disabled">
+                <a href="{{ route('language', \App::getLocale()=='ru' ? 'uz' : 'ru') }}" class="btn language__option language__option--{{ \App::getLocale()=='ru' ? 'uz' : 'ru' }}" data-status="disabled">
 									{{ \App::getLocale()=='ru' ? 'o\'z' : 'РУ' }}
 								</a>
               </div>
             </div> 
-            <div class="telegram-join basic-flex">
-              <a href="#"><img src="/img/tg.png" alt="Telegram">Подписатся</a>
-            </div>
+            <a href="#" class="telegram-join basic-flex" style="color: white">
+              <img src="/img/tg.png" alt="Telegram">Подписатся
+            </a>
           </div>
         </div>
         <button type="button" class="btn btn-menu"><span class="hamburger"></span></button>

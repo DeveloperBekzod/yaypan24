@@ -1,8 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
+{{-- @section('title')
 	Home page
-@endsection
+@endsection --}}
 
 @section('content')
 

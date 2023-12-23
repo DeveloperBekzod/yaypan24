@@ -1,8 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
+{{-- @section('title')
 	{{$post['slug_'.\App::getLocale()]}}
-@endsection
+@endsection --}}
 
 @section('content')
 <section class="article">
@@ -16,7 +16,7 @@
 				{!! $post['text_'.\App::getLocale()] !!}
 				<div class="hashtags basic-flex">
 					@foreach ($post->tags as $tag)
-						<a href="#">#{{$tag['name_'.\App::getLocale()]}}</a>
+						<a href="{{ route('tagsPost', $tag['slug_'.\App::getLocale()]) }}">#{{$tag['name_'.\App::getLocale()]}}</a>
 					@endforeach
 				</div>
 			</div>

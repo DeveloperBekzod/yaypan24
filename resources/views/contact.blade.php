@@ -1,8 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
+{{-- @section('title')
 	Contact
-@endsection
+@endsection --}}
 
 @section('content')
 <section class="contact-details">

@@ -6,6 +6,9 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
+use App\Models\Message;
+use DateTime;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,14 +27,13 @@ Route::get('/posts/{slug}', [SiteController::class, 'postDetail'])->name('postDe
 Route::get('/tags/{slug}', [SiteController::class, 'tagsPost'])->name('tagsPost');
 Route::get('/category/{slug}', [SiteController::class, 'categoryPosts'])->name('categoryPosts');
 Route::get('/search}', [SiteController::class, 'search'])->name('search');
-Route::get('/lang/{lang}', function ($lang) {
-	session(['lang'=>$lang]);
-	return back();
-});
+Route::get('lang/{lang}',[SiteController::class, 'language'])->name('language');
 
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
 	Route::get('/dashboard', function () {
-			return view('admin.dashboard');
+			$messages = Message::latest()->get();
+			
+			return view('admin.dashboard', compact('messages'));
 	})->middleware(['verified'])->name('dashboard');
 	Route::resource('categories', CategoriesController::class);
 	Route::resource('posts', PostController::class);

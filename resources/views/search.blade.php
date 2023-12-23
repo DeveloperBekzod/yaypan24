@@ -1,8 +1,8 @@
 @extends('layouts.site')
-
+{{-- 
 @section('title')
 	Search page {{$key}}
-@endsection
+@endsection --}}
 
 @section('content')
 
