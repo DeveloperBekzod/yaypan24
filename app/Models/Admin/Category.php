@@ -2,10 +2,12 @@
 
 namespace App\Models\Admin;
 
+use App\Observers\CategoryObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use App\Models\Admin\Post;
 
+#[ObservedBy([CategoryObserver::class])]
 class Category extends Model
 {
     use HasFactory;

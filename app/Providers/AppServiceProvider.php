@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\Admin\Category;
 use App\Models\Admin\Post;
+use App\Models\Message;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,14 +24,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
-				view()->composer('layouts.site', function ($view) {
-					$categories = Category::all();
-					$view->with(compact('categories'));
-				});
+        view()->composer('layouts.site', function ($view) {
+            $categories = Category::all();
+            $view->with(compact('categories'));
+        });
 
-				view()->composer('sections.popularPosts', function ($view) {
-					$popularposts = Post::limit(4)->orderBy('view', 'DESC')->get();
-					$view->with(compact('popularposts'));
-				});
+        view()->composer('sections.popularPosts', function ($view) {
+            $popularposts = Post::limit(4)->orderBy('view', 'DESC')->get();
+            $view->with(compact('popularposts'));
+        });
+        view()->composer('layouts.admin', function ($view) {
+            $messages = Message::latest()->get();
+            $view->with(compact('messages'));
+        });
     }
 }

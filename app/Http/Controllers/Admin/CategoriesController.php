@@ -35,11 +35,9 @@ class CategoriesController extends Controller
             'name_ru' => 'required|unique:categories'
         ]);
         $categoriesData = $request->all();
-        $categoriesData['slug_uz'] = \Str::slug($categoriesData['name_uz']);
-        $categoriesData['slug_ru'] = \Str::slug($categoriesData['name_ru']);
 
         Category::create($categoriesData);
-        // dd($categoriesData);
+
         return redirect()->route('admin.categories.index')->with('message', 'Category created successfully !');
     }
 
@@ -70,9 +68,6 @@ class CategoriesController extends Controller
         ]);
 
         $requestData = $request->all();
-
-        $requestData['slug_uz'] = \Str::slug($requestData['name_uz']);
-        $requestData['slug_ru'] = \Str::slug($requestData['name_ru']);
 
         $category->update($requestData);
 

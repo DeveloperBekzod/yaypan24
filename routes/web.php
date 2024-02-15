@@ -6,7 +6,6 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
-use App\Models\Message;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +29,6 @@ Route::get('lang/{lang}', [SiteController::class, 'language'])->name('language')
 
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
-        $messages = Message::latest()->get();
-
         return view('admin.dashboard', compact('messages'));
     })->middleware(['verified'])->name('dashboard');
     Route::resource('categories', CategoriesController::class);
