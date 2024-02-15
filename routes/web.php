@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
 use App\Models\Message;
-use DateTime;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,18 +26,18 @@ Route::get('/posts/{slug}', [SiteController::class, 'postDetail'])->name('postDe
 Route::get('/tags/{slug}', [SiteController::class, 'tagsPost'])->name('tagsPost');
 Route::get('/category/{slug}', [SiteController::class, 'categoryPosts'])->name('categoryPosts');
 Route::get('/search}', [SiteController::class, 'search'])->name('search');
-Route::get('lang/{lang}',[SiteController::class, 'language'])->name('language');
+Route::get('lang/{lang}', [SiteController::class, 'language'])->name('language');
 
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
-	Route::get('/dashboard', function () {
-			$messages = Message::latest()->get();
-			
-			return view('admin.dashboard', compact('messages'));
-	})->middleware(['verified'])->name('dashboard');
-	Route::resource('categories', CategoriesController::class);
-	Route::resource('posts', PostController::class);
-	Route::resource('tags', TagController::class);
-	Route::post('post-image-upload', [PostController::class, 'upload'])->name('upload');
+    Route::get('/dashboard', function () {
+        $messages = Message::latest()->get();
+
+        return view('admin.dashboard', compact('messages'));
+    })->middleware(['verified'])->name('dashboard');
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('posts', PostController::class);
+    Route::resource('tags', TagController::class);
+    Route::post('post-image-upload', [PostController::class, 'upload'])->name('upload');
 });
 
 
@@ -48,4 +47,4 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::delete('admin/profile', [PostController::class, 'upload'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

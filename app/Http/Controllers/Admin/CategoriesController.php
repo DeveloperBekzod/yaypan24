@@ -13,8 +13,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-				$categories = Category::paginate(3);
-        return view('admin.categories.index', ['categories'=>$categories]);
+        $categories = Category::paginate(3);
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 
     /**
@@ -29,18 +29,18 @@ class CategoriesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {		
-				$this->validate($request, [
-					'name_uz'=>'required|unique:categories',
-					'name_ru'=>'required|unique:categories'
-				]);
+    {
+        $this->validate($request, [
+            'name_uz' => 'required|unique:categories',
+            'name_ru' => 'required|unique:categories'
+        ]);
         $categoriesData = $request->all();
-				$categoriesData['slug_uz']=\Str::slug($categoriesData['name_uz']);
-				$categoriesData['slug_ru']=\Str::slug($categoriesData['name_ru']);
+        $categoriesData['slug_uz'] = \Str::slug($categoriesData['name_uz']);
+        $categoriesData['slug_ru'] = \Str::slug($categoriesData['name_ru']);
 
-				Category::create($categoriesData);
-				// dd($categoriesData);
-				return redirect()->route('admin.categories.index')->with('message', 'Category created successfully !');
+        Category::create($categoriesData);
+        // dd($categoriesData);
+        return redirect()->route('admin.categories.index')->with('message', 'Category created successfully !');
     }
 
     /**
@@ -48,7 +48,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.detail', ['category'=>$category]);
+        return view('admin.categories.detail', ['category' => $category]);
     }
 
     /**
@@ -56,7 +56,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', ['category'=>$category]);
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -64,19 +64,19 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-			$request->validate([
-				'name_uz'=>'required',
-				'name_ru'=>'required'
-			]);
+        $request->validate([
+            'name_uz' => 'required',
+            'name_ru' => 'required'
+        ]);
 
-			$requestData = $request->all();
+        $requestData = $request->all();
 
-			$requestData['slug_uz'] = \Str::slug($requestData['name_uz']);
-			$requestData['slug_ru'] = \Str::slug($requestData['name_ru']);
+        $requestData['slug_uz'] = \Str::slug($requestData['name_uz']);
+        $requestData['slug_ru'] = \Str::slug($requestData['name_ru']);
 
-			$category->update($requestData);
+        $category->update($requestData);
 
-			return redirect()->route('admin.categories.index')->with('message', 'Category updated successfully !');
+        return redirect()->route('admin.categories.index')->with('message', 'Category updated successfully !');
     }
 
     /**
@@ -84,7 +84,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-			$category->delete();
-			return redirect()->route('admin.categories.index')->with('message', 'Category deleted successfully !');
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('message', 'Category deleted successfully !');
     }
 }
