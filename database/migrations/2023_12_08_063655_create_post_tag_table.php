@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
-						$table->bigInteger('post_id');
-						$table->bigInteger('tag_id');
+			$table->bigInteger('post_id');
+			$table->bigInteger('tag_id');
             $table->timestamps();
         });
     }

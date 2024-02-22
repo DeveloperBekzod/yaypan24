@@ -13,21 +13,23 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-						$table->integer('category_id');
-						$table->string('title_uz');
-						$table->string('title_ru');
-						$table->string('slug_uz')->unique();
-						$table->string('slug_ru')->unique();
-						$table->text('text_uz');
-						$table->text('text_ru');
-						$table->string('image')->nullable();
-						$table->integer('view')->default(0);
-						$table->string('meta_title_uz')->nullable();
-						$table->string('meta_title_ru')->nullable();
-						$table->string('meta_description_uz')->nullable();
-						$table->string('meta_description_ru')->nullable();
-						$table->string('meta_keywords_uz')->nullable();
-						$table->string('meta_keywords_ru')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->boolean('is_special')->default(false);
+            $table->string('title_uz');
+            $table->string('title_ru');
+            $table->string('slug_uz')->unique();
+            $table->string('slug_ru')->unique();
+            $table->text('text_uz');
+            $table->text('text_ru');
+            $table->string('image')->nullable();
+            $table->integer('view')->default(0);
+            $table->string('meta_title_uz')->nullable();
+            $table->string('meta_title_ru')->nullable();
+            $table->string('meta_description_uz')->nullable();
+            $table->string('meta_description_ru')->nullable();
+            $table->string('meta_keywords_uz')->nullable();
+            $table->string('meta_keywords_ru')->nullable();
             $table->timestamps();
         });
     }
