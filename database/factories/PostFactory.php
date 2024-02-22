@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Admin\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,9 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $category = Category::inRandomOrder()->first();
         return [
-            'category_id' => $this->faker->numberBetween(1, 10),
+            'category_id' => $category->id,
             'is_special' => $this->faker->boolean(),
             'title_uz' => $this->faker->sentence(),
             'title_ru' => $this->faker->sentence(),
