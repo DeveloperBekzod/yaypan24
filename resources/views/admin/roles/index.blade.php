@@ -36,12 +36,22 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
+                                                <th>Roles</th>
                                                 <th>Actions</th>
                                             </tr>
                                             @forelse ($roles as $role)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $role->name }}</td>
+                                                    <td>
+                                                        @foreach ($role->permissions as $permission)
+                                                            <div class="badge badge-success mb-1">{{ $permission->name }}
+                                                            </div>
+                                                            @if ($loop->iteration % 4 == 0)
+                                                                <br>
+                                                            @endif
+                                                        @endforeach
+                                                    </td>
                                                     <td>
                                                         <a href="{{ route('admin.roles.edit', $role->id) }}"
                                                             class="btn btn-icon icon-left btn-primary"><i

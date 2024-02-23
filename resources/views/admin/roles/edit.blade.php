@@ -32,6 +32,19 @@
                                             <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    <div class="form-group">
+                                        <label class="d-block">Permissions</label>
+                                        @forelse ($permissions as $permission)
+                                            <div class="form-check form-check-inline">
+                                                <input name="permissions[]" class="form-check-input" type="checkbox"
+                                                    id="{{ $permission->name }}" value="{{ $permission->name }}"
+                                                    @if (in_array($permission->id, $role->permissions->pluck('id')->toArray())) checked @endif>
+                                                <label class="form-check-label"
+                                                    for="{{ $permission->name }}">{{ $permission->name }}</label>
+                                            </div>
+                                        @empty
+                                        @endforelse
+                                    </div>
                                     <div class="card-footer text-right">
                                         <button class="btn btn-primary mr-1" type="submit">Edit</button>
                                         <button class="btn btn-secondary" type="reset">Reset</button>
