@@ -4,8 +4,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +32,17 @@ Route::get('lang/{lang}', [SiteController::class, 'language'])->name('language')
 
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard', compact('messages'));
+        return view('admin.dashboard');
     })->middleware(['verified'])->name('dashboard');
     Route::resource('categories', CategoriesController::class);
     Route::resource('posts', PostController::class);
     Route::resource('tags', TagController::class);
     Route::post('post-image-upload', [PostController::class, 'upload'])->name('upload');
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::resource('users', UserController::class)->except('show');
+        Route::resource('roles', RoleController::class)->except('show');
+        Route::resource('permissions', PermissionController::class)->except('show');
+    });
 });
 
 
