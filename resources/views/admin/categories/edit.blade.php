@@ -15,8 +15,10 @@
                             <div class="card-header">
                                 <h4>Edit category</h4>
                                 <div class="card-header-form">
-                                    <a href="{{ route('admin.categories.create') }}"
-                                        class="btn btn-primary float-right">Create new category</a>
+                                    @can('create category')
+                                        <a href="{{ route('admin.categories.create') }}"
+                                            class="btn btn-primary float-right">Create new category</a>
+                                    @endcan
                                     <a href="{{ route('admin.categories.index') }}" class="btn mr-2 btn-dark float-right">Go
                                         Back</a>
                                 </div>
