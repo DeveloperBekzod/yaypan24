@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -12,7 +13,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::all();
+        return view('admin.permissions.index', compact('permissions'));
     }
 
     /**
@@ -20,7 +22,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.permissions.create');
     }
 
     /**
@@ -28,31 +30,33 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate(['name' => 'required|string|max:255|unique:permissions']);
+        $requestData = $request->all();
+        Permission::create($requestData);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()->route('admin.permissions.index')->with('message', 'Permission successfully created');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permission $permission)
     {
-        //
+        return view('admin.permissions.edit', compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        $request->validate(['name' => 'required|string|max:255|unique:permissions']);
+
+        $requestData = $request->all();
+
+        $permission->update($requestData);
+
+        return redirect()->route('admin.permissions.index')->with('message', 'Permission successfully updated');
     }
 
     /**

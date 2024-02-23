@@ -23,7 +23,7 @@
                                 </div>
                             @endif
                             <div class="card-header">
-                                <h4>Toles Table</h4>
+                                <h4>Roles Table</h4>
                                 <div class="card-header-form">
                                     <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right">Create
                                         new role</a>

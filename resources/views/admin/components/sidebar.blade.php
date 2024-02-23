@@ -8,9 +8,10 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
             @role('admin')
-                <li class="dropdown {{ request()->routeIs('admin.users.*', 'admin.roles.*') ? 'active' : '' }}"><a
-                        href="#"
-                        class="menu-toggle nav-link has-dropdown {{ request()->routeIs('admin.users.*', 'admin.roles.*') ? 'toggled' : '' }}"><svg
+                <li
+                    class="dropdown {{ request()->routeIs('admin.users.*', 'admin.roles.*', 'admin.permissions.*') ? 'active' : '' }}">
+                    <a href="#"
+                        class="menu-toggle nav-link has-dropdown {{ request()->routeIs('admin.users.*', 'admin.roles.*', 'admin.permissions.*') ? 'toggled' : '' }}"><svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="feather feather-user-check">
@@ -20,9 +21,12 @@
                         </svg><span>Auth</span></a>
                     <ul class="dropdown-menu"
                         style="display: {{ request()->routeIs(['admin.users.*', 'admin.roles.*', 'admin.permissions.*']) ? 'block' : 'none' }};">
-                        <li><a href="{{ route('admin.users.index') }}">Users</a></li>
-                        <li><a href="{{ route('admin.roles.index') }}">Roles</a></li>
-                        <li><a href="{{ route('admin.permissions.index') }}">Permissions</a></li>
+                        <li class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}"><a
+                                href="{{ route('admin.users.index') }}">Users</a></li>
+                        <li class="{{ request()->routeIs('admin.roles.*') ? 'active' : '' }}"><a
+                                href="{{ route('admin.roles.index') }}">Roles</a></li>
+                        <li class="{{ request()->routeIs('admin.permissions.*') ? 'active' : '' }}"><a
+                                href="{{ route('admin.permissions.index') }}">Permissions</a></li>
                     </ul>
                 </li>
             @endrole
