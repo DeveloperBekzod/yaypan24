@@ -7,18 +7,24 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Post;
 use App\Models\Admin\Category;
 use App\Models\Admin\Tag;
-use Str;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create post', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit post', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete post', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-			$posts = Post::all();
-			
-			return view('admin.posts.index', compact('posts'));
+        $posts = Post::all();
+
+        return view('admin.posts.index', compact('posts'));
         //
     }
 
@@ -27,8 +33,8 @@ class PostController extends Controller
      */
     public function create()
     {
-				$categories = Category::all();
-				$tags = Tag::all();
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('admin.posts.create', compact('categories', 'tags'));
     }
 
@@ -38,25 +44,25 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-					'title_uz' => 'required',
-					'title_ru' => 'required',
-					'category_id' => 'required',
-					'text_uz' => 'required',
-					'text_ru' => 'required',
-				]);
+            'title_uz' => 'required',
+            'title_ru' => 'required',
+            'category_id' => 'required',
+            'text_uz' => 'required',
+            'text_ru' => 'required',
+        ]);
 
-				$requestData = $request->all();
+        $requestData = $request->all();
 
-				if($request->hasFile('image')) {
-					$file = $request->file('image');
-					$image_name = time().'.'.$file->getClientOriginalExtension();
-					$file->move('img/posts/', $image_name);
-					$requestData['image'] = $image_name;
-				}
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $image_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move('img/posts/', $image_name);
+            $requestData['image'] = $image_name;
+        }
 
-				$post = Post::create($requestData);
-				$post->tags()->attach($request->tags);
-				return redirect()->route('admin.posts.index')->with('message', 'Post created successfully !!!');
+        $post = Post::create($requestData);
+        $post->tags()->attach($request->tags);
+        return redirect()->route('admin.posts.index')->with('message', 'Post created successfully !!!');
     }
 
     /**
@@ -72,8 +78,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-				$categories = Category::all();
-				$tags = Tag::all();
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
@@ -83,26 +89,26 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-					'title_uz' => 'required',
-					'title_ru' => 'required',
-					'category_id' => 'required',
-					'text_uz' => 'required',
-					'text_ru' => 'required',
-				]);
+            'title_uz' => 'required',
+            'title_ru' => 'required',
+            'category_id' => 'required',
+            'text_uz' => 'required',
+            'text_ru' => 'required',
+        ]);
 
-				$requestData = $request->all();
-				if(!$request['is_special']) $requestData['is_special'] = false;
+        $requestData = $request->all();
+        if (!$request['is_special']) $requestData['is_special'] = false;
 
-				if($request->hasFile('image')) {
-					$file = $request->file('image');
-					$image_name = time().'.'.$file->getClientOriginalExtension();
-					$file->move('img/posts/', $image_name);
-					$requestData['image'] = $image_name;
-				}
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $image_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move('img/posts/', $image_name);
+            $requestData['image'] = $image_name;
+        }
 
-				$post->update($requestData);
-				$post->tags()->sync($request->tags);
-				return redirect()->route('admin.posts.index')->with('message', 'Post updated successfully !!!');
+        $post->update($requestData);
+        $post->tags()->sync($request->tags);
+        return redirect()->route('admin.posts.index')->with('message', 'Post updated successfully !!!');
     }
 
     /**
@@ -111,26 +117,25 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-				return redirect()->route('admin.posts.index')->with('message', 'Post deleted successfully !');
+        return redirect()->route('admin.posts.index')->with('message', 'Post deleted successfully !');
     }
 
-		public function upload(Request $request) 
-		{
+    public function upload(Request $request)
+    {
 
-			if($request->hasFile('upload')) {
-				$originName = $request->file('upload')->getClientOriginalName();
-				$fileName = pathinfo($originName, PATHINFO_FILENAME);
-				$extension = $request->file('upload')->getClientOriginalExtension();
-				$fileName = $fileName.'_'.time().'.'.$extension;
-				$request->file('upload')->move(public_path('img/posts/'), $fileName);
-				$CKEditorFuncNum = $request->input('CKEditorFuncNum');
-				$url = asset('img/posts/'.$fileName); 
-				$msg = 'Image successfully uploaded'; 
-				$response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-					 
-				@header('Content-type: text/html; charset=utf-8'); 
-				echo $response;
-			}
-		}
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+            $request->file('upload')->move(public_path('img/posts/'), $fileName);
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('img/posts/' . $fileName);
+            $msg = 'Image successfully uploaded';
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
 
+            @header('Content-type: text/html; charset=utf-8');
+            echo $response;
+        }
+    }
 }

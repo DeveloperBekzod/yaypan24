@@ -49,6 +49,24 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input id="password" type="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            value="{{ old('password') }}">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_confirmation">Password Confirmation</label>
+                                        <input id="password_confirmation" type="password" name="password_confirmation"
+                                            class="form-control @error('password_confirmation') is-invalid @enderror"
+                                            value="{{ old('password_confirmation') }}">
+                                        @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label for="roles">User role</label>
                                         <select name="roles[]" id="roles" class="form-control select2" multiple>
                                             @foreach ($roles as $role)

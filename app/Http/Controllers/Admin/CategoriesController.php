@@ -8,6 +8,12 @@ use App\Models\Admin\Category;
 
 class CategoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create category', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit category', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete category', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

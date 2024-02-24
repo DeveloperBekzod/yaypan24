@@ -81,14 +81,18 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $user->id],
         ]);
 
-        $requestData = $request->all();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if (isset($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
 
-        $user->update($requestData);
+        $user->save();
 
-        $user->assignRole($request->roles);
+        $user->syncRoles($request->roles);
         $user->syncPermissions($request->permissions);
 
         return redirect()->route('admin.users.index')->with('message', 'User successfully updated');

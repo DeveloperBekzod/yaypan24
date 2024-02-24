@@ -5,15 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Tag;
+use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create post', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit post', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete post', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-				$tags = Tag::paginate(3);
+        $tags = Tag::paginate(3);
         return view('admin.tags.index', compact('tags'));
     }
 
@@ -31,17 +39,17 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-					'name_uz'=>'required|unique:tags',
-					'name_ru' => 'required|unique:tags'
-				]);
+            'name_uz' => 'required|unique:tags',
+            'name_ru' => 'required|unique:tags'
+        ]);
 
-				$requestData = $request->all();
-				$requestData['slug_uz'] = \Str::slug($request->name_uz);
-				$requestData['slug_ru'] = \Str::slug($request->name_ru);
+        $requestData = $request->all();
+        $requestData['slug_uz'] = Str::slug($request->name_uz);
+        $requestData['slug_ru'] = Str::slug($request->name_ru);
 
-				Tag::create($requestData);
+        Tag::create($requestData);
 
-				return redirect()->route('admin.tags.index')->with('message', 'Tag created succsessfully !!!');
+        return redirect()->route('admin.tags.index')->with('message', 'Tag created succsessfully !!!');
     }
 
     /**
@@ -66,17 +74,17 @@ class TagController extends Controller
     public function update(Request $request, Tag $tag)
     {
         $request->validate([
-					'name_uz'=>'required',
-					'name_ru' => 'required'
-				]);
+            'name_uz' => 'required',
+            'name_ru' => 'required'
+        ]);
 
-				$requestData = $request->all();
-				$requestData['slug_uz'] = \Str::slug($request->name_uz);
-				$requestData['slug_ru'] = \Str::slug($request->name_ru);
+        $requestData = $request->all();
+        $requestData['slug_uz'] = Str::slug($request->name_uz);
+        $requestData['slug_ru'] = Str::slug($request->name_ru);
 
-				$tag->update($requestData);
+        $tag->update($requestData);
 
-				return redirect()->route('admin.tags.index')->with('message', 'Tag updated succsessfully !!!');
+        return redirect()->route('admin.tags.index')->with('message', 'Tag updated succsessfully !!!');
     }
 
     /**
@@ -85,6 +93,6 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-				return redirect()->route('admin.tags.index')->with('message', 'Tag deleted successfully !');
+        return redirect()->route('admin.tags.index')->with('message', 'Tag deleted successfully !');
     }
 }
