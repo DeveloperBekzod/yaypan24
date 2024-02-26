@@ -33,7 +33,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return response($category);
+        return new CategoryResource($category);
     }
 
     /**
@@ -51,6 +51,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return 'Deleted';
+        return 'Category Deleted';
     }
 }
