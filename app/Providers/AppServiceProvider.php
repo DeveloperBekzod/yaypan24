@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\Admin\Category;
@@ -24,9 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrap();
+        Paginator::useBootstrapFive();
         view()->composer('layouts.site', function ($view) {
-            $categories = Category::all();
+            $categories =  Cache::rememberForever('category', function () {
+                return Category::all();
+            });
             $currensyRaw = Http::get('https://cbu.uz/oz/arkhiv-kursov-valyut/json/');
             $currensyJson = $currensyRaw->json();
             $currensyData = [
@@ -38,7 +42,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('sections.popularPosts', function ($view) {
-            $popularposts = Post::limit(4)->orderBy('view', 'DESC')->get();
+            $popularposts = Cache::remember('popularposts', 60*60, function (){
+                return Post::limit(4)->orderBy('view', 'DESC')->get();
+            });
             $view->with(compact('popularposts'));
         });
         view()->composer('layouts.admin', function ($view) {

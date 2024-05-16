@@ -8,7 +8,7 @@ use App\Models\Admin\Post;
 use App\Models\Admin\Category;
 use App\Models\Admin\Tag;
 use App\Models\Message as Messagemodel;
-use Mail;
+use \Illuminate\Support\Facades\Mail;
 use App\Mail\Message;
 use App\Rules\GoogleRecaptcha;
 use Butschster\Head\Facades\Meta;

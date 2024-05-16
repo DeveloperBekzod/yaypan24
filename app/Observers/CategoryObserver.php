@@ -12,5 +12,6 @@ class CategoryObserver
     {
         $category['slug_ru'] = Str::slug($category['name_ru']);
         $category['slug_uz'] = Str::slug($category['name_uz']);
+
     }
 }
