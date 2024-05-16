@@ -18,12 +18,11 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $specialpost = Post::where('is_special', true)->limit(6)->latest()->get();
         $posts = Post::where('is_special', false)->limit(6)->latest()->get();
         Meta::prependTitle('Home page');
         Meta::setDescription('Awesome page');
         Meta::setKeywords(['Awesome keyword', 'keyword2']);
-        return view('index', compact('specialpost', 'posts'));
+        return view('index', compact('posts'));
     }
 
     public function contact()

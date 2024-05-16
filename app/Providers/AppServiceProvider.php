@@ -47,6 +47,14 @@ class AppServiceProvider extends ServiceProvider
             });
             $view->with(compact('popularposts'));
         });
+
+        view()->composer('sections.mainPosts', function ($view) {
+            $specialposts = Cache::remember('specialposts', 60*60, function (){
+                return Post::where('is_special', true)->limit(6)->latest()->get();
+            });
+            $view->with(compact('specialposts'));
+        });
+
         view()->composer('layouts.admin', function ($view) {
             $messages = Message::latest()->get();
             $view->with(compact('messages'));
