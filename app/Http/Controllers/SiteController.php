@@ -35,7 +35,7 @@ class SiteController extends Controller
 
     public function postDetail($slug)
     {
-        $post = Post::where('slug_' . App::getLocale(), $slug)->first();;
+        $post = Post::query()->where('slug_uz', $slug)->orWhere('slug_ru', $slug)->first();
         Meta::prependTitle($post['meta_title_' . App::getLocale()]);
         Meta::setDescription($post['meta_description_' . App::getLocale()]);
         Meta::setKeywords($post['meta_keywords_' . App::getLocale()]);
@@ -51,7 +51,7 @@ class SiteController extends Controller
 
     public function categoryPosts($category_slug)
     {
-        $category = Category::where('slug_' . App::getLocale(), $category_slug)->first();
+        $category = Category::query()->where('slug_uz', $category_slug)->orWhere('slug_ru', $category_slug)->first();
         Meta::prependTitle($category['meta_title_' . App::getLocale()]);
         Meta::setDescription($category['meta_description_' . App::getLocale()]);
         Meta::setKeywords($category['meta_keywords_' . App::getLocale()]);
@@ -104,7 +104,6 @@ class SiteController extends Controller
     public function language($lang)
     {
         session(['lang' => $lang]);
-        // dd(session(['lang']));
         return back();
     }
 }
