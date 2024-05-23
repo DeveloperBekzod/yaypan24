@@ -31,13 +31,17 @@ class AppServiceProvider extends ServiceProvider
             $categories =  Cache::rememberForever('category', function () {
                 return Category::all();
             });
-            $currensyRaw = Http::get('https://cbu.uz/oz/arkhiv-kursov-valyut/json/');
-            $currensyJson = $currensyRaw->json();
-            $currensyData = [
-                'usd' => [...$currensyJson[0]],
-                'eur' => [...$currensyJson[1]],
-                'rub' => [...$currensyJson[2]],
-            ];
+            $currensyData = Cache::remember('currensyData', 60*60*6, function () {
+                $currensyRaw = Http::get('https://cbu.uz/oz/arkhiv-kursov-valyut/json/');
+                $currensyJson = $currensyRaw->json();
+                $currensy = [
+                    'usd' => [...$currensyJson[0]],
+                    'eur' => [...$currensyJson[1]],
+                    'rub' => [...$currensyJson[2]],
+                ];
+                return $currensy;
+            });
+
             $view->with(compact('categories', 'currensyData'));
         });
 
@@ -60,9 +64,12 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('messages'));
         });
         view()->composer('layouts.statistics', function ($view) {
-            $covid = Http::get('https://api.covidtracking.com/v1/us/current.json');
-            $datajson = $covid->json();
-            $stat = [...$datajson[0]];
+            $stat = Cache::remember('statistics', 60*60*6, function () {
+                $covid = Http::get('https://api.covidtracking.com/v1/us/current.json');
+                $datajson = $covid->json();
+                return [...$datajson[0]];
+            });
+
             $view->with(compact('stat'));
         });
     }
