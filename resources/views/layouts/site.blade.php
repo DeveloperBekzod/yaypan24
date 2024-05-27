@@ -3,7 +3,7 @@
 
 <head>
     @meta_tags
-    {{-- <title> @yield('title') - YAYPAN 24</title> --}}
+     <title> @yield('title') - YAYPAN 24</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 
@@ -26,9 +26,9 @@
                         <img src="/img/logo.png" alt="YAYPANLIKLAR24">
                     </a>
                     <div class="currencies basic-flex">
-                        <div class="currency"><span>$</span><span>{{ $currensyData['usd']['Rate'] }}</span></div>
-                        <div class="currency"><span>P</span><span>{{ $currensyData['rub']['Rate'] }}</span></div>
-                        <div class="currency"><span>E</span><span>{{ $currensyData['eur']['Rate'] }}</span></div>
+                        <div class="currency"><span>$</span><span>{{ $currencyData['usd']['Rate'] }}</span></div>
+                        <div class="currency"><span>P</span><span>{{ $currencyData['rub']['Rate'] }}</span></div>
+                        <div class="currency"><span>E</span><span>{{ $currencyData['eur']['Rate'] }}</span></div>
                     </div>
                     <div class="header__actions basic-flex">
                         <form method="GET" action="{{ route('search') }}" class="search-form basic-flex">
@@ -56,9 +56,9 @@
                 <button type="button" class="btn btn-menu"><span class="hamburger"></span></button>
                 <nav class="navbar">
                     <div class="currencies-responsive basic-flex">
-                        <div class="currency"><span>$</span><span>{{ $currensyData['usd']['Rate'] }}</span></div>
-                        <div class="currency"><span>P</span><span>{{ $currensyData['rub']['Rate'] }}</span></div>
-                        <div class="currency"><span>E</span><span>{{ $currensyData['eur']['Rate'] }}</span></div>
+                        <div class="currency"><span>$</span><span>{{ $currencyData['usd']['Rate'] }}</span></div>
+                        <div class="currency"><span>P</span><span>{{ $currencyData['rub']['Rate'] }}</span></div>
+                        <div class="currency"><span>E</span><span>{{ $currencyData['eur']['Rate'] }}</span></div>
                     </div>
                     @include('layouts.navigations')
                 </nav>

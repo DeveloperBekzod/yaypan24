@@ -4,8 +4,8 @@
 		<ul class="popular-news__list">
 			@foreach ($popularposts as $popular)
 				<li class="popular-news__item">
-					<a href="{{route('postDetail', $popular['slug_'.\App::getLocale()])}}">
-						<p class="popular-news__description">{{ $popular['title_'.\App::getLocale()] }}</p>
+					<a href="{{route('postDetail', $popular->slug())}}">
+						<p class="popular-news__description">{{ $popular->title() }}</p>
 						<span class="popular-news__date">{{ $popular->created_at->format('H:i / d.m.Y')}}</span>
 					</a>
 				</li>

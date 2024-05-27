@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataObjects\PostData;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use App\Models\Admin\Post;
@@ -18,7 +19,10 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('is_special', false)->limit(6)->latest()->get();
+        $postsData = Post::where('is_special', false)->limit(6)->latest()->get();
+        $posts  = $postsData->transform(function ($post) {
+            return PostData::createFromEloquentModel($post);
+        });
         Meta::prependTitle('Home page');
         Meta::setDescription('Awesome page');
         Meta::setKeywords(['Awesome keyword', 'keyword2']);
@@ -35,7 +39,8 @@ class SiteController extends Controller
 
     public function postDetail($slug)
     {
-        $post = Post::query()->where('slug_uz', $slug)->orWhere('slug_ru', $slug)->first();
+        $postData = Post::query()->where('slug_uz', $slug)->orWhere('slug_ru', $slug)->first();
+        $post = PostData::createFromEloquentModel($postData);
         Meta::prependTitle($post['meta_title_' . App::getLocale()]);
         Meta::setDescription($post['meta_description_' . App::getLocale()]);
         Meta::setKeywords($post['meta_keywords_' . App::getLocale()]);
@@ -52,6 +57,7 @@ class SiteController extends Controller
     public function categoryPosts($category_slug)
     {
         $category = Category::query()->where('slug_uz', $category_slug)->orWhere('slug_ru', $category_slug)->first();
+
         Meta::prependTitle($category['meta_title_' . App::getLocale()]);
         Meta::setDescription($category['meta_description_' . App::getLocale()]);
         Meta::setKeywords($category['meta_keywords_' . App::getLocale()]);

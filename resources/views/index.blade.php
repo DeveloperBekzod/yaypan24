@@ -1,13 +1,12 @@
 @extends('layouts.site')
 
-{{-- @section('title')
-	Home page
-@endsection --}}
+@section('title')
+    Home page
+@endsection
 
 @section('content')
 
 @include('sections.mainPosts')
-
 <div class="container">
 	<div class="notification basic-flex">
 		<div class="notification__text basic-flex">

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\DataObjects\CategoryData;
+use App\DataObjects\PostData;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\ServiceProvider;
@@ -29,32 +31,40 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
         view()->composer('layouts.site', function ($view) {
             $categories =  Cache::rememberForever('category', function () {
-                return Category::all();
+                $categoriesData = Category::all();
+                return  $categoriesData->transform(function ($category) {
+                    return CategoryData::createFromEloquentModel($category);
+                });
             });
-            $currensyData = Cache::remember('currensyData', 60*60*6, function () {
-                $currensyRaw = Http::get('https://cbu.uz/oz/arkhiv-kursov-valyut/json/');
-                $currensyJson = $currensyRaw->json();
-                $currensy = [
-                    'usd' => [...$currensyJson[0]],
-                    'eur' => [...$currensyJson[1]],
-                    'rub' => [...$currensyJson[2]],
+            $currencyData = Cache::remember('currencyData', 60*60*6, function () {
+                $currencyRaw = Http::get('https://cbu.uz/oz/arkhiv-kursov-valyut/json/');
+                $currencyJson = $currencyRaw->json();
+                return [
+                    'usd' => [...$currencyJson[0]],
+                    'eur' => [...$currencyJson[1]],
+                    'rub' => [...$currencyJson[2]],
                 ];
-                return $currensy;
             });
 
-            $view->with(compact('categories', 'currensyData'));
+            $view->with(compact('categories', 'currencyData'));
         });
 
         view()->composer('sections.popularPosts', function ($view) {
             $popularposts = Cache::remember('popularposts', 60*60, function (){
-                return Post::limit(4)->orderBy('view', 'DESC')->get();
+                $posts = Post::query()->limit(4)->orderBy('view', 'DESC')->get();
+                return $posts->transform(function ($post) {
+                    return PostData::createFromEloquentModel($post);
+                });
             });
             $view->with(compact('popularposts'));
         });
 
         view()->composer('sections.mainPosts', function ($view) {
             $specialposts = Cache::remember('specialposts', 60*60, function (){
-                return Post::where('is_special', true)->limit(6)->latest()->get();
+                $posts = Post::query()->where('is_special', true)->limit(6)->latest()->get();
+                return $posts->transform(function ($post) {
+                    return PostData::createFromEloquentModel($post);
+                });
             });
             $view->with(compact('specialposts'));
         });

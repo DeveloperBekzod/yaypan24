@@ -171,6 +171,7 @@ return [
         App\Providers\MetaTagsServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        \Akbarali\DataObject\DataObjectProvider::class,
     ])->toArray(),
 
     /*
