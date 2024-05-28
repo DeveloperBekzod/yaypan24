@@ -6,9 +6,9 @@
 	<div class="container">
 		<div class="news__wrapper basic-flex">
 			<div class="column-news">
-				<h2 class="news__title">{{$category['name_'.\App::getLocale()]}} Последние новости</h2>
+				<h2 class="news__title">{{$category->name()}} Последние новости</h2>
 				@include('sections.latestPosts')
-				{{$posts->links()}}
+{{--				{{$posts->links()}}--}}
 				<button type="button" class="btn load-more-btn">Больше новостей</button>
 			</div>
 			@include('sections.popularPosts')

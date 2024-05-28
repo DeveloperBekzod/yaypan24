@@ -10,12 +10,9 @@
 <div class="container">
 	<div class="notification basic-flex">
 		<div class="notification__text basic-flex">
-			<h3>Хотите узнать новости первыми? подключите уведомления!
-			</h3>
+			<h3>{{__('notification')}}</h3>
 		</div>
-		<button type="button" class="notification__button btn">
-			Включит  уведомления!
-		</button>
+		<button type="button" class="notification__button btn">{{__('on-notification')}}</button>
 	</div>
 </div>
 
@@ -23,9 +20,9 @@
 	<div class="container">
 		<div class="news__wrapper basic-flex">
 			<div class="column-news">
-				<h2 class="news__title">Последние новости</h2>
+				<h2 class="news__title">{{__('latest')}}</h2>
 				@include('sections.latestPosts')
-				<button type="button" class="btn load-more-btn">Больше новостей</button>
+				<button type="button" class="btn load-more-btn">{{__('more')}}</button>
 			</div>
 			@include('sections.popularPosts')
 		</div>
@@ -35,8 +32,8 @@
 <div class="apps-block container basic-flex">
 	<div class="apps-block__image"></div>
 	<div class="apps-block__content">
-		<h4>Всегда будьте в курсе последних новостей!</h4>
-		<p>Установите мобильное приложение NAMANGANLIKLAR24 и все новости в вашем кармане!</p>
+		<h4>{{__('keep-always')}}</h4>
+		<p>{{__('install')}}</p>
 	</div>
 	<div class="apps-block__links basic-flex">
 		<div class="links__item">

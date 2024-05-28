@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <a href="#" class="telegram-join basic-flex" style="color: white">
-                            <img src="/img/tg.png" alt="Telegram">Подписатся
+                            <img src="/img/tg.png" alt="Telegram">{{__('follow')}}
                         </a>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     @include('layouts.navigations')
                 </nav>
                 <div class="advertisement-box">
-                    <h4>PLACEHOLDER FOR ADVERTISEMENT</h1>
+                    <h4>{{__('ads')}}</h1>
                 </div>
             </div>
         </header>
@@ -77,33 +77,29 @@
     <footer class="footer">
         <div class="container">
             <div class="footer__top basic-flex">
-                <a href="{{ route('index') }}" class="footer_logo"><img src="/img/logo-blue.png"
+                <a href="{{ route('index') }}" class="footer_logo"><img src="/img/logo.png"
                         alt="YAYPANLIKLAR24"></a>
                 <div class="join-telegram-wrapper basic-flex">
-                    <p>Подписывайтесь на наш канал в Telegram и будьте всегда в курсе самых последних новостей:</p>
-                    <a href="#" class="join-telegram">Подписатся</a>
+                    <p>{{__('telegram')}}:</p>
+                    <a href="https://t.me/bekzod0500" class="join-telegram">{{__('follow')}}</a>
                 </div>
             </div>
             <div class="footer__bottom">
                 <div class="about-site">
-                    <h4>О сайте</h4>
-                    <p>Воспроизводство, копирование, тиражирование, распространение и иное использование информации с
-                        сайта «YAYPANLIKLAR24.UZ» возможно только с предварительного письменного разрешения редакции.
-                    </p>
+                    <h4>{{__('about')}}</h4>
+                    <p>{{__('about-text')}}</p>
                 </div>
                 <ul class="footer-menu">
-                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">Информация о сайте</a>
+                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">{{__('site-about')}}</a>
                     </li>
-                    <li class="footer-menu__item"><a href="{{ route('contact') }}" class="footer-menu__link">Напишите
-                            нам</a></li>
-                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">Реклама</a></li>
-                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">Прислать новость</a></li>
+                    <li class="footer-menu__item"><a href="{{ route('contact') }}" class="footer-menu__link">{{__('write')}}</a></li>
+                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">{{__('ad')}}</a></li>
+                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">{{__('send')}}</a></li>
                 </ul>
                 <ul class="footer-menu">
-                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">Использование материалов
-                        </a></li>
-                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">Темы дня</a></li>
-                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">Наша команда</a></li>
+                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">{{__('use')}}</a></li>
+                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">{{__('theme')}}</a></li>
+                    <li class="footer-menu__item"><a href="#" class="footer-menu__link">{{__('us')}}</a></li>
                 </ul>
             </div>
         </div>

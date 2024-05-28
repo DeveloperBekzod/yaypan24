@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->nullable();
-            // $table->foreign('category_id')->references('id')->on('categories');
+//            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->boolean('is_special')->default(false);
             $table->string('title_uz');
             $table->string('title_ru');
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->integer('view')->default(0);
             $table->string('meta_title_uz')->nullable();
             $table->string('meta_title_ru')->nullable();
-            $table->string('meta_description_uz')->nullable();
-            $table->string('meta_description_ru')->nullable();
+            $table->text('meta_description_uz')->nullable();
+            $table->text('meta_description_ru')->nullable();
             $table->string('meta_keywords_uz')->nullable();
             $table->string('meta_keywords_ru')->nullable();
             $table->timestamps();

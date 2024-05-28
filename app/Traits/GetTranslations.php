@@ -22,4 +22,16 @@ trait GetTranslations {
     public function text(): string {
         return app()->getLocale() == 'ru' ? $this->text_ru : $this->text_uz;
     }
+
+    public function metaTitle(): string {
+        return app()->getLocale() == 'ru' ? $this->meta_title_ru : $this->meta_title_uz;
+    }
+
+    public function metaDescription(): string {
+        return app()->getLocale() == 'ru' ? $this->meta_description_ru : $this->meta_description_uz;
+    }
+
+    public function metaKeywords(): string {
+        return app()->getLocale() == 'ru' ? $this->meta_keywords_ru : $this->meta_keywords_uz;
+    }
 }
