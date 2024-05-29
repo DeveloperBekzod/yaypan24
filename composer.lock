@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70c735fe55eb8b18193eceb5dbc1d527",
+    "content-hash": "ce2a44229fb63829510480367358d839",
     "packages": [
+        {
+            "name": "akbarali/action-data",
+            "version": "1.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akbarali1/action-data.git",
+                "reference": "d21778d51484948f8db4d93fa42d2ecf979d939c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akbarali1/action-data/zipball/d21778d51484948f8db4d93fa42d2ecf979d939c",
+                "reference": "d21778d51484948f8db4d93fa42d2ecf979d939c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": ">=8.10.0",
+                "illuminate/http": ">=8.10.0",
+                "illuminate/support": ">=7",
+                "illuminate/validation": ">=8.10.0",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Akbarali\\ActionData\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Akbarali",
+                    "email": "github@akbarali.uz",
+                    "homepage": "https://github.com/akbarali1"
+                }
+            ],
+            "description": "Action Data Validate PHP Laravel",
+            "keywords": [
+                "laravel",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/akbarali1/action-data/issues",
+                "source": "https://github.com/akbarali1/action-data/tree/1.2.6"
+            },
+            "time": "2024-05-02T15:32:59+00:00"
+        },
         {
             "name": "akbarali/data-object",
             "version": "2.7.2",
@@ -1655,16 +1707,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.44.0",
+            "version": "v10.48.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6"
+                "reference": "afdc2b03bd8d126446583da5414d659491aa4f54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1199dbe361787bbe9648131a79f53921b4148cf6",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/afdc2b03bd8d126446583da5414d659491aa4f54",
+                "reference": "afdc2b03bd8d126446583da5414d659491aa4f54",
                 "shasum": ""
             },
             "require": {
@@ -1712,6 +1764,7 @@
             "conflict": {
                 "carbonphp/carbon-doctrine-types": ">=3.0",
                 "doctrine/dbal": ">=4.0",
+                "mockery/mockery": "1.6.8",
                 "phpunit/phpunit": ">=11.0.0",
                 "tightenco/collect": "<5.5.33"
             },
@@ -1768,7 +1821,7 @@
                 "league/flysystem-sftp-v3": "^3.0",
                 "mockery/mockery": "^1.5.1",
                 "nyholm/psr7": "^1.2",
-                "orchestra/testbench-core": "^8.18",
+                "orchestra/testbench-core": "^8.23.4",
                 "pda/pheanstalk": "^4.0",
                 "phpstan/phpstan": "^1.4.7",
                 "phpunit/phpunit": "^10.0.7",
@@ -1857,7 +1910,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-02-13T16:01:16+00:00"
+            "time": "2024-05-21T17:53:51+00:00"
         },
         {
             "name": "laravel/passport",

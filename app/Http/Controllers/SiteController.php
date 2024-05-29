@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ActionData\ContactActionData;
 use App\DataObjects\CategoryData;
 use App\DataObjects\CategoryPostsData;
 use App\DataObjects\PostData;
@@ -112,11 +113,14 @@ class SiteController extends Controller
 
     public function sendMessage(Request $request)
     {
+        $actionData = ContactActionData::createFromRequest($request);
+        dd($actionData);
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
             'telephone' => 'required',
-            'message' => 'required',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|min:10|max:10000',
             'g-recaptcha-response' => ['required', new GoogleRecaptcha]
         ], ['g-recaptcha-response.required' => 'The recaptcha field is required.']);
         $requestData = $request->all();

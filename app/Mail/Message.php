@@ -49,8 +49,7 @@ class Message extends Mailable
      */
     public function attachments(): array
     {
-        return [
-					Attachment::fromPath(public_path($this->data['file'])),
-				];
+
+        return isset($this->data['file']) ?  [Attachment::fromPath(public_path($this->data['file']))] : [];
     }
 }

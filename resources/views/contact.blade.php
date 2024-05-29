@@ -15,23 +15,19 @@
                     <h3 class="form__wrapper-title">{{__('write')}}</h3>
                     <form method="POST" action="{{route('sendMessage')}}" enctype="multipart/form-data">
                         @csrf
+                        @method('POST')
                         <div class="form__top">
-                            <label><input type="text" placeholder="Имя" name="name" value="{{old('name')}}"
-                                          required></label>
-                            <label><input type="email" placeholder="Электронная почта" name="email"
-                                          value="{{old('email')}}" required></label>
-                            <label><input type="text" placeholder="Номер телефона" name="telephone"
-                                          value="{{old('telephone')}}" required></label>
-                            <label><input type="text" placeholder="Тема" name="subject"
-                                          value="{{old('subject')}}"></label>
-                            <textarea class="contact-tetxarea" placeholder="Текст" name="message"
-                                      required>{{old('message')}}</textarea>
+                            <label><input type="text" placeholder="Имя" name="name" value="{{old('name')}}"></label>
+                            <label><input type="email" placeholder="Электронная почта" name="email" value="{{old('email')}}"></label>
+                            <label><input type="text" placeholder="Номер телефона" name="telephone" value="{{old('telephone')}}"></label>
+                            <label><input type="text" placeholder="Тема" name="subject" value="{{old('subject')}}"></label>
+                            <textarea class="contact-tetxarea" placeholder="Текст" name="message">{{old('message')}}</textarea>
                         </div>
                         <div class="form__bottom">
                             <input type="file" name="file" id="file" class="inputfile">
                             <label for="file" class="basic-flex">Прикрепить файл</label>
                             <div class="form-group" style="margin-bottom: 20px">
-                                <div class=" g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                <div class="g-recaptcha mt-4" data-sitekey={{config('services.recaptcha.key')}}></div>
                                 @if ($errors->has('g-recaptcha-response'))
                                     <span class="text-danger"
                                           style="color: crimson">{{ $errors->first('g-recaptcha-response') }}</span>

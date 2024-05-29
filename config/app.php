@@ -177,6 +177,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         \Akbarali\DataObject\DataObjectProvider::class,
+        \Akbarali\ActionData\Providers\ActionDataServiceProvider::class,
     ])->toArray(),
 
     /*

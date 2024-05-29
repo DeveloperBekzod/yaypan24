@@ -19,8 +19,8 @@ class Language
 					$lang = session('lang');
 				}
 				else $lang = 'uz';
-				
-				\App::setLocale($lang);
+
+				app()->setLocale($lang);
 
         return $next($request);
     }
