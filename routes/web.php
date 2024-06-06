@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\UserController;
 
 Route::get('/', [SiteController::class, 'index'])->name('index');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
-Route::post('/contact', [SiteController::class, 'sendMessage'])->name('sendMessage');
+Route::post('/contact', [SiteController::class, 'sendContact'])->name('sendMessage');
 Route::get('/posts/{slug}', [SiteController::class, 'postDetail'])->name('postDetail');
 Route::get('/tags/{slug}', [SiteController::class, 'tagsPost'])->name('tagsPost');
 Route::get('/category/{slug}', [SiteController::class, 'categoryPosts'])->name('categoryPosts');

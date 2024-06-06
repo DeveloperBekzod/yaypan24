@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\DataObjects\CategoryData;
 use App\DataObjects\PostData;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\Admin\Category;

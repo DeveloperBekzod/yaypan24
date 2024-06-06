@@ -4,23 +4,18 @@ namespace App\Http\Controllers;
 
 use App\ActionData\ContactActionData;
 use App\DataObjects\CategoryData;
-use App\DataObjects\CategoryPostsData;
 use App\DataObjects\PostData;
 use App\DataObjects\PostDetailData;
 use App\DataObjects\TagData;
-use App\Services\PostService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use App\Models\Admin\Post;
 use App\Models\Admin\Category;
 use App\Models\Admin\Tag;
 use App\Models\Message as Messagemodel;
-use Illuminate\Support\Facades\Cache;
 use \Illuminate\Support\Facades\Mail;
 use App\Mail\Message;
-use App\Rules\GoogleRecaptcha;
 use Butschster\Head\Facades\Meta;
-use Illuminate\Support\Facades\Redis;
 
 
 class SiteController extends Controller
@@ -28,7 +23,7 @@ class SiteController extends Controller
     public function index()
     {
         $postsData = Post::where('is_special', false)->limit(6)->latest()->get();
-        $posts  = $postsData->transform(function ($post) {
+        $posts = $postsData->transform(function ($post) {
             return PostData::createFromEloquentModel($post);
         });
         Meta::prependTitle('Home page');
@@ -111,27 +106,17 @@ class SiteController extends Controller
         return view('search', compact('key', 'posts'));
     }
 
-    public function sendMessage(Request $request)
+    public function sendContact(ContactActionData $actionData)
     {
-        $actionData = ContactActionData::createFromRequest($request);
-        dd($actionData);
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'telephone' => 'required',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string|min:10|max:10000',
-            'g-recaptcha-response' => ['required', new GoogleRecaptcha]
-        ], ['g-recaptcha-response.required' => 'The recaptcha field is required.']);
-        $requestData = $request->all();
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $file_name = time() . '.' . $file->getClientOriginalExtension();
+        $data = $actionData->toArray();
+        if ($actionData->file) {
+            $file = $actionData->file;
+            $file_name =  $actionData->file->hashName();
             $file->move('files/', $file_name);
-            $requestData['file'] = 'files/' . $file_name;
+            $data['file'] = 'files/'.$file_name;
         }
-        $message = Messagemodel::create($requestData);
-        Mail::to('raximovbekzodbek95@gmail.com')->send(new Message($requestData));
+        Messagemodel::query()->create($data);
+        Mail::to('raximovbekzodbek95@gmail.com')->send(new Message($data));
         return back()->with('message', 'Murojaat yuborildi.');
     }
 

@@ -21,5 +21,10 @@
     "send": "Yangilik yuborish",
     "use": "Manbalardan foydalanish",
     "theme": "Kun mavzusi",
-    "us": "Bizning jamoa"
+    "us": "Bizning jamoa",
+    "submit": "Yuborish",
+    "email": "Elektron pochta",
+    "smm": "Ijtimoiy tarmoqlar",
+    "channel": "Telegram kanal",
+    "app": "Modil dastur"
 }

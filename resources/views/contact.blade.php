@@ -38,18 +38,18 @@
                                 <span class="verification-code">4 k 7 Z a</span>
                             </label> --}}
 
-                            <button type="submit" class="btn send-btn">Отправить</button>
+                            <button type="submit" class="btn send-btn">{{__('submit')}}</button>
                         </div>
                     </form>
                 </div>
                 <div class="business__card">
                     <h3 class="card__title">YAYPANLIKLAR24</h3>
                     <div class="card__item basic-flex">
-                        <span card__item-title>Электронная почта</span>
+                        <span card__item-title>{{__('email')}}</span>
                         <a class="email__link" href="mailto:info@yaypanliklar24.uz">info@yaypanliklar24.uz</a>
                     </div>
                     <div class="card__item basic-flex">
-                        <span card__item-title>Социальные сети</span>
+                        <span card__item-title>{{__('smm')}}</span>
                         <div class="card__social-items basic-flex">
                             <a href="#" class="social__item"></a>
                             <a href="#" class="social__item"></a>
@@ -57,11 +57,11 @@
                         </div>
                     </div>
                     <div class="card__item basic-flex">
-                        <span card__item-title>Телеграм канал</span>
+                        <span card__item-title>{{__('channel')}}</span>
                         <a class="card-join-telegram basic-flex" href="#">{{__('follow')}}</a>
                     </div>
                     <div class="card__item basic-flex">
-                        <span card__item-title>Мобильная приложение</span>
+                        <span card__item-title>{{__('app')}}</span>
                         <div class="card__apps-wrapper basic-flex">
                             <a href="#"><img src="/img/googleplay-wh.png" alt="GooglePlay"></a>
                             <a href="#"><img src="/img/appstore-white.png" alt="AppStore"></a>
